@@ -26,4 +26,16 @@ public class ExperimentoQuimico extends Experimento {
     public void setInvestigador(Investigador investigador) {
         this.investigador = investigador;
     }
+    @Override
+    public String getTipoExperimento(){
+        return "Químico";
+    }
+
+    @Override
+    public String toString(){
+        return "Experimento Químico [nombre= "+getNombre()+", duración= "+getDuracion()+
+                ", resultado= "+ (getResultado()?"Éxito":"Fallo")+ ", tipo Reactivo= "+ tipoReactivo+
+                ", Investigador= "+investigador.getNombre()+"]";
+
+    }
 }

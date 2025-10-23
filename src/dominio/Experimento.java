@@ -34,4 +34,5 @@ public abstract class Experimento {
     public void setResultado(Boolean resultado) {
         this.resultado = resultado;
     }
+    public abstract String getTipoExperimento();
 }
