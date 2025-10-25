@@ -19,6 +19,9 @@ public class InvestigadorServiceImpl implements InvestigadorService {
         return investigadores;
     }
 
+//    equalsIgnoreCase compara el nombre del investigador con el parámetro nombre proporcionado,
+//    ignorando las diferencias entre mayúsculas y minúsculas.
+
     @Override
     public Investigador buscarPorNombre(String nombre) {
         for(Investigador inv : investigadores){
