@@ -26,6 +26,7 @@ public class ExperimentoQuimico extends Experimento {
     public void setInvestigador(Investigador investigador) {
         this.investigador = investigador;
     }
+
     @Override
     public String getTipoExperimento(){
         return "Químico";
