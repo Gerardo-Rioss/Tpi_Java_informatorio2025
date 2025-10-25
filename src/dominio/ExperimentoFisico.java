@@ -32,9 +32,22 @@ public class ExperimentoFisico extends Experimento {
     public String getTipoExperimento() {
         return "Físico";
     }
+
+//    StringBuilder es una clase en Java utilizada para construir cadenas de texto de manera eficiente,
+//    especialmente cuando se concatenan múltiples cadenas en un bucle. A diferencia de usar el operador +
+//    con objetos String (que crea nuevos objetos cada vez), StringBuilder modifica la misma cadena en memoria,
+//    lo que lo hace más eficiente.
+
     @Override
     public String toString(){
-        return "Falta rellenar datos";
+        StringBuilder nombresInvestigadores = new StringBuilder();
+        for (Investigador inv: investigadores){
+            nombresInvestigadores.append(inv.getNombre()).append(", ");
+        }
+        return "Experimento Fisico [nombre= "+getNombre()+", duración= "+ getDuracion()+
+                ", resultado= "+(getResultado()?"Éxito":"Fallo")+
+                ", instrumento= "+instrumento+
+                ", investigador= "+nombresInvestigadores.toString()+"+";
     }
 
 
