@@ -66,7 +66,14 @@ public class ExperimentoServiceImpl implements ExperimentoService {
 
     @Override
     public double getPromedioDuracion() {
-        return 0;
+        if(experimentos.isEmpty()){
+            return 0;
+        }
+        int total=0;
+        for(Experimento exp: experimentos){
+            total+=exp.getDuracion();
+        }
+        return (double) total/experimentos.size();
     }
 
     @Override
