@@ -78,7 +78,10 @@ public class ExperimentoServiceImpl implements ExperimentoService {
 
     @Override
     public double getPorcentajeExito() {
-        return 0;
+        if(experimentos.isEmpty()){
+            return 0;
+        }
+        return (getPorcentajeExito()*100.0)/experimentos.size();
     }
 
     @Override
