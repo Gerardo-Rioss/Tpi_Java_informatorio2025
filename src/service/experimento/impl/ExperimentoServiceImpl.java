@@ -8,7 +8,6 @@ import service.experimento.ExperimentoService;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ExperimentoServiceImpl implements ExperimentoService {
     private List<Experimento> experimentos = new ArrayList<>();
@@ -86,11 +85,45 @@ public class ExperimentoServiceImpl implements ExperimentoService {
 
     @Override
     public Investigador getInvestigadorConMasExperimentos() {
-        return null;
+        List<Investigador> todos = getListaDeInvestigadores();
+        if(todos.isEmpty()){
+            return null;
+        }
+        Investigador masFrecuente = null;
+        int maxContador = 0;
+        // Recorremos la lista para ver cuál investigador aparece más veces
+        for (int i =0; i<todos.size();i++){
+            Investigador actual = todos.get(i);
+            int contador=0;
+            //Contamos cuantas veces aparece el investigador
+            for(int j=0;j<todos.size();j++){
+                if(todos.get(j).equals(actual)){
+                    contador++;
+                }
+            }
+            // Si este tiene más apariciones que el máximo actual, lo actualizamos
+            if (contador>maxContador){
+                maxContador= contador;
+                masFrecuente=actual;
+            }
+        }
+        return masFrecuente;
     }
 
     @Override
-    public Map<Investigador, Integer> getContadorExperimentosPorInvestigador() {
-        return Map.of();
+    public List<Investigador> getListaDeInvestigadores(){
+        List<Investigador> lista = new ArrayList<>();
+        for(Experimento exp:experimentos){
+            if(exp instanceof ExperimentoQuimico ){
+                ExperimentoQuimico eq = (ExperimentoQuimico) exp;
+                lista.add(eq.getInvestigador());
+            } else if (exp instanceof ExperimentoFisico) {
+                ExperimentoFisico ef = (ExperimentoFisico) exp;
+                lista.addAll(ef.getInvestigadores());
+            }
+        }
+        return lista;
     }
+
+
 }

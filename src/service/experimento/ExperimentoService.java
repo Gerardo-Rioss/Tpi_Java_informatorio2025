@@ -18,8 +18,5 @@ public interface ExperimentoService {
     double getPromedioDuracion();
     double getPorcentajeExito();
     Investigador getInvestigadorConMasExperimentos();
-    Map<Investigador,Integer> getContadorExperimentosPorInvestigador();
-
-
-
+    List<Investigador> getListaDeInvestigadores();
 }
