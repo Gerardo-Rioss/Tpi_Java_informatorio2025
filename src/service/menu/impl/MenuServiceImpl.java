@@ -1,8 +1,14 @@
 package service.menu.impl;
 
+import dominio.Investigador;
+import service.investigador.InvestigadorService;
+import service.investigador.impl.InvestigadorServiceImpl;
 import service.menu.MenuService;
+import service.utils.Imput;
 
 public class MenuServiceImpl implements MenuService {
+    InvestigadorService investigadorService = new InvestigadorServiceImpl();
+
     @Override
     public void mostrarMenu() {
         System.out.println("\n=== SISTEMA GESTOR DE EXPERIMENTOS - LABORATORIO CHAD ===");
@@ -22,6 +28,11 @@ public class MenuServiceImpl implements MenuService {
     }
 
     private void registrarInvestigador(){
-
+        System.out.println("\n--- REGISTRAR INVESTIGADOR ---");
+        String nombre = Imput.leerCadena("Ingrese el nombre del investigador: ");
+        int edad = Imput.leerEntero("Ingrese la edad: ");
+        Investigador investigador = new Investigador(nombre,edad);
+        investigadorService.resgistrarInvestigador(investigador);
+        System.out.println("Investigador registrado con éxito.");
     }
 }
