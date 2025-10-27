@@ -1,5 +1,6 @@
 package service.utils;
 
+import javax.swing.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -19,4 +20,23 @@ public class Imput {
             }
         }
     }
+
+    public static int leerEnteroConRango(String mensaje, int min, int max){
+        while (true){
+            int valor = leerEntero(mensaje);
+            if (valor>= min && valor<=max){
+                return valor;
+            }else{
+                System.out.println("Error: El número debe estar entre "+min+" y "+max+"." );
+            }
+        }
+    }
+
+    public static String leerCadena(String mensaje){
+        System.out.print(mensaje);
+        return scanner.nextLine();
+    }
+
+
+
 }
