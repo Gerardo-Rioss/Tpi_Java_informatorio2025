@@ -54,7 +54,7 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         if(experimentos.isEmpty()){
             return null;
         }
-        Experimento mayor = experimentos.getFirst();
+        Experimento mayor = experimentos.get(0);
         for(Experimento exp: experimentos){
             if(exp.getDuracion()>mayor.getDuracion()){
                 mayor= exp;

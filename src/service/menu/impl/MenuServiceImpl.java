@@ -19,6 +19,9 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void procesarOpcion(int opcion) {
+    }
+
+    private void registrarInvestigador(){
 
     }
 }
