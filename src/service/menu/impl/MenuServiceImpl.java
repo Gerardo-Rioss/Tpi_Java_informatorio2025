@@ -5,6 +5,7 @@ import service.investigador.InvestigadorService;
 import service.investigador.impl.InvestigadorServiceImpl;
 import service.menu.MenuService;
 import service.utils.Imput;
+import service.utils.Validar;
 
 public class MenuServiceImpl implements MenuService {
     InvestigadorService investigadorService = new InvestigadorServiceImpl();
@@ -29,8 +30,27 @@ public class MenuServiceImpl implements MenuService {
 
     private void registrarInvestigador(){
         System.out.println("\n--- REGISTRAR INVESTIGADOR ---");
-        String nombre = Imput.leerCadena("Ingrese el nombre del investigador: ");
-        int edad = Imput.leerEntero("Ingrese la edad: ");
+        String nombre;
+        do{
+            nombre = Imput.leerCadena("Ingrese nombre del investigador: ");
+            try{
+                Validar.validadNoVacio(nombre,"nombre");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        }while (true);
+
+        int edad;
+        do {
+            edad= Imput.leerEntero("Ingrese edad del investigador: ");
+            try{
+                Validar.validarPositivo(edad,"edad");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error "+ e.getMessage());
+            }
+        }while (true);
         Investigador investigador = new Investigador(nombre,edad);
         investigadorService.resgistrarInvestigador(investigador);
         System.out.println("Investigador registrado con éxito.");
