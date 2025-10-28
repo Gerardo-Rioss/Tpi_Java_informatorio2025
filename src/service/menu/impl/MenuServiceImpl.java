@@ -43,6 +43,12 @@ public class MenuServiceImpl implements MenuService {
             case 1:
                 registrarInvestigador();
                 break;
+            case 2:
+                registrarExperimento();
+                break;
+            case 3:
+                mostrarListadoExperimentos();
+                break;
             case 9:
                 System.out.println("Saliendo del sistema...");
                 break;
@@ -182,6 +188,18 @@ public class MenuServiceImpl implements MenuService {
         ExperimentoFisico ef = new ExperimentoFisico(nombre, duracion,resultado,instrumento, seleccionados);
         experimentoService.registrarExperimentoFisico(ef);
         System.out.println("Experimento físico registrado con éxito.");
+    }
+
+    private void mostrarListadoExperimentos(){
+        System.out.println("\n--- LISTADO DE EXPERIMENTOS ---");
+        List<Experimento> experimentos = experimentoService.obtenerTodos();
+        if (experimentos.isEmpty()){
+            System.out.println("No hay experimentos registrados.");
+            return;
+        }
+        for(Experimento exp : experimentos){
+            System.out.println(exp);
+        }
     }
 
 
