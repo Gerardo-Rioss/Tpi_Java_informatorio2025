@@ -44,10 +44,10 @@ public class ExperimentoFisico extends Experimento {
         for (Investigador inv: investigadores){
             nombresInvestigadores.append(inv.getNombre()).append(", ");
         }
-        return "Experimento Fisico [nombre= "+getNombre()+", duración= "+ getDuracion()+
+        return "Experimento Físico [nombre= "+getNombre()+", duración= "+ getDuracion()+
                 ", resultado= "+(getResultado()?"Éxito":"Fallo")+
                 ", instrumento= "+instrumento+
-                ", investigador= "+nombresInvestigadores.toString()+"+";
+                ", investigador= "+nombresInvestigadores.toString()+",";
     }
 
 

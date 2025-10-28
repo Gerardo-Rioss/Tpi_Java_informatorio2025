@@ -88,7 +88,7 @@ public class MenuServiceImpl implements MenuService {
     private void registrarExperimento(){
         System.out.println("Seleccione tipo de experimento: ");
         System.out.println("1. Químico");
-        System.out.println("1. Físico");
+        System.out.println("2. Físico");
         int tipo = Imput.leerEnteroConRango("Opcion: ",1,2);
 
         String nombre;
