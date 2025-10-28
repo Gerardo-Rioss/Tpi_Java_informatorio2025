@@ -1,14 +1,27 @@
 package service.menu.impl;
 
+import dominio.Experimento;
+import dominio.ExperimentoFisico;
+import dominio.ExperimentoQuimico;
 import dominio.Investigador;
+import service.experimento.ExperimentoService;
 import service.investigador.InvestigadorService;
-import service.investigador.impl.InvestigadorServiceImpl;
 import service.menu.MenuService;
 import service.utils.Imput;
 import service.utils.Validar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MenuServiceImpl implements MenuService {
-    InvestigadorService investigadorService = new InvestigadorServiceImpl();
+    private  InvestigadorService investigadorService;
+    private  ExperimentoService experimentoService;
+
+    public MenuServiceImpl(InvestigadorService investigadorService, ExperimentoService experimentoService) {
+        this.investigadorService = investigadorService;
+        this.experimentoService = experimentoService;
+
+    }
 
     @Override
     public void mostrarMenu() {
@@ -26,6 +39,16 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void procesarOpcion(int opcion) {
+        switch (opcion){
+            case 1:
+                registrarInvestigador();
+                break;
+            case 9:
+                System.out.println("Saliendo del sistema...");
+                break;
+            default:
+                System.out.println("Opción no válida. Intente nuevamente.");
+        }
     }
 
     private void registrarInvestigador(){
@@ -55,4 +78,111 @@ public class MenuServiceImpl implements MenuService {
         investigadorService.resgistrarInvestigador(investigador);
         System.out.println("Investigador registrado con éxito.");
     }
+
+    private void registrarExperimento(){
+        System.out.println("Seleccione tipo de experimento: ");
+        System.out.println("1. Químico");
+        System.out.println("1. Físico");
+        int tipo = Imput.leerEnteroConRango("Opcion: ",1,2);
+
+        String nombre;
+        do {
+            nombre = Imput.leerCadena("Nombre del experimento: ");
+            try{
+                Validar.validadNoVacio(nombre,"nombre del experimento");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        }while (true);
+
+        int duracion;
+        do {
+            duracion = Imput.leerEntero("Duración (minutos): ");
+            try{
+                Validar.validarPositivo(duracion,"duración");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        }while (true);
+
+        boolean resultado = Imput.leerBooleano("Resultado (éxito)");
+        if (tipo==1){
+            registrarExperimentoQuimico(nombre,duracion,resultado);
+        }else {
+            registrarExperimentoFisico(nombre,duracion,resultado);
+        }
+    }
+
+    private void registrarExperimentoQuimico(String nombre, int duracion, boolean resultado){
+
+        String reactivo;
+        do {
+            reactivo = Imput.leerCadena("Tipo de reactivo: ");
+            try{
+                Validar.validadNoVacio(reactivo,"reactivo");
+                break;
+            } catch(IllegalArgumentException e){
+                System.out.println("Error: "+ e.getMessage());
+            }
+        }while (true);
+
+        List<Investigador> investigadores = investigadorService.obtenerTodos();
+        if(investigadores.isEmpty()){
+            System.out.println("No hay investigadores registrados. Debe registrar al menos uno.");
+            return;
+        }
+        Investigador investigador= Imput.seleccionarDeLista("Seleccione Investigador: ",investigadores);
+
+        ExperimentoQuimico eq = new ExperimentoQuimico(nombre, duracion,resultado,reactivo,investigador);
+        experimentoService.registrarExperimentoQuimico(eq);
+        System.out.println("Experimento químico registrado con éxito.");
+    }
+
+    private void registrarExperimentoFisico(String nombre, int duracion, boolean resultado){
+
+        String instrumento;
+        do {
+            instrumento = Imput.leerCadena("Instrumento utilizado: ");
+            try{
+                Validar.validadNoVacio(instrumento,"instrumento");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+ e.getMessage());
+            }
+        }while (true);
+
+        List<Investigador>investigadores = investigadorService.obtenerTodos();
+        if (investigadores.isEmpty()){
+            System.out.println("No hay investigadores registrados. Debe registrar al menos uno.");
+            return;
+        }
+
+        List<Investigador> seleccionados= new ArrayList<>();
+        while (true){
+            try{
+                Investigador inv = Imput.seleccionarDeLista("Seleccione un investigador (0 para terminar): ",investigadores);
+                seleccionados.add(inv);
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+ e.getMessage());
+                break;
+            }
+            System.out.println("¿Desea agregar otro investigador? (1: Si , 2: No): ");
+            if (!Imput.leerBooleano("")){
+                break;
+            }
+        }
+
+        if(seleccionados.isEmpty()){
+            System.out.println("No se seleccionaron investigadores. Operación cancelada.");
+            return;
+        }
+
+        ExperimentoFisico ef = new ExperimentoFisico(nombre, duracion,resultado,instrumento, seleccionados);
+        experimentoService.registrarExperimentoFisico(ef);
+        System.out.println("Experimento físico registrado con éxito.");
+    }
+
+
 }

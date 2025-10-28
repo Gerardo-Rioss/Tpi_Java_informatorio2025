@@ -1,8 +1,24 @@
+import service.experimento.ExperimentoService;
+import service.experimento.impl.ExperimentoServiceImpl;
+import service.investigador.InvestigadorService;
+import service.investigador.impl.InvestigadorServiceImpl;
+import service.menu.MenuService;
+import service.menu.impl.MenuServiceImpl;
 import service.utils.Imput;
 
 public class app {
     public static void main(String[] args) {
-     String nombre = Imput.leerCadena("Ingrese el nombre: ");
-     System.out.println(nombre);
+
+        InvestigadorService investigadorService = new InvestigadorServiceImpl() ;
+        ExperimentoService experimentoService = new ExperimentoServiceImpl();
+
+        MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
+        int opcion;
+        do{
+            menuService.mostrarMenu();
+            opcion= Imput.leerEnteroConRango("Seleccione una opción: ",1,9);
+            menuService.procesarOpcion(opcion);
+        }while (opcion!=9);
+
     }
 }
