@@ -58,6 +58,9 @@ public class MenuServiceImpl implements MenuService {
             case 6:
                 generarReporte();
                 break;
+            case 7:
+                mostrarInvestigadorConMasExperimentos();
+                break;
             case 9:
                 System.out.println("Saliendo del sistema...");
                 break;
@@ -239,6 +242,16 @@ public class MenuServiceImpl implements MenuService {
 
         System.out.println("Promedio de duración: "+promedio+" minutos.");
         System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
+    }
+
+    private void mostrarInvestigadorConMasExperimentos(){
+        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
+        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
+        if (investigador==null){
+            System.out.println("No hay investigadores con experimentos registrados.");
+        }else{
+            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
+        }
     }
 
 
