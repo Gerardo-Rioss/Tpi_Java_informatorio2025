@@ -52,6 +52,12 @@ public class MenuServiceImpl implements MenuService {
             case 4:
                 mostrarTotales();
                 break;
+            case 5:
+                mostrarExperimentoMayorDuracion();
+                break;
+            case 6:
+                generarReporte();
+                break;
             case 9:
                 System.out.println("Saliendo del sistema...");
                 break;
@@ -213,6 +219,26 @@ public class MenuServiceImpl implements MenuService {
         System.out.println("Experimentos exitosos: " + exitosos);
         System.out.println("Experimentos fallidos: " + fallidos);
         System.out.println("Total de experimentos: " + (exitosos + fallidos));
+    }
+
+    private void mostrarExperimentoMayorDuracion(){
+        System.out.println("\n--- EXPERIMENTO DE MAYOR DURACIÓN ---");
+        Experimento experimento = experimentoService.getExperimentoMayorDuracion();
+
+        if (experimento == null){
+            System.out.println("No hay experimentos registrados.");
+        }else {
+            System.out.println("Experimento de mayor duración: "+experimento.getNombre()+" con "+experimento.getDuracion()+" minutos.");
+        }
+    }
+
+    private void generarReporte(){
+        System.out.println("\n--- REPORTE DE ESTADÍSTICAS ---");
+        double promedio = experimentoService.getPromedioDuracion();
+        double porcentajeExitoso = experimentoService.getPorcentajeExito();
+
+        System.out.println("Promedio de duración: "+promedio+" minutos.");
+        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
     }
 
 

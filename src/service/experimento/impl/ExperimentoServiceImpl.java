@@ -80,7 +80,7 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         if(experimentos.isEmpty()){
             return 0;
         }
-        return (getPorcentajeExito()*100.0)/experimentos.size();
+        return (getTotalExitosos()*100.0)/experimentos.size();
     }
 
     @Override
