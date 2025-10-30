@@ -47,7 +47,7 @@ public class ExperimentoFisico extends Experimento {
         return "Experimento Físico [nombre= "+getNombre()+", duración= "+ getDuracion()+
                 ", resultado= "+(getResultado()?"Éxito":"Fallo")+
                 ", instrumento= "+instrumento+
-                ", investigador= "+nombresInvestigadores.toString()+",";
+                ", investigador= "+nombresInvestigadores.toString()+"]";
     }
 
 
