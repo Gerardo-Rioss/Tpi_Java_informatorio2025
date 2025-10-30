@@ -49,6 +49,9 @@ public class MenuServiceImpl implements MenuService {
             case 3:
                 mostrarListadoExperimentos();
                 break;
+            case 4:
+                mostrarTotales();
+                break;
             case 9:
                 System.out.println("Saliendo del sistema...");
                 break;
@@ -200,6 +203,16 @@ public class MenuServiceImpl implements MenuService {
         for(Experimento exp : experimentos){
             System.out.println(exp);
         }
+    }
+
+    private void mostrarTotales(){
+        System.out.println("\n--- TOTALES DE EXPERIMENTOS ---");
+        int exitosos = experimentoService.getTotalExitosos();
+        int fallidos = experimentoService.getTotalFallidos();
+
+        System.out.println("Experimentos exitosos: " + exitosos);
+        System.out.println("Experimentos fallidos: " + fallidos);
+        System.out.println("Total de experimentos: " + (exitosos + fallidos));
     }
 
 
