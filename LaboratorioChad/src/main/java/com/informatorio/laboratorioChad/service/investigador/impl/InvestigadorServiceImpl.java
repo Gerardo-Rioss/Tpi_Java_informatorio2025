@@ -1,34 +1,50 @@
 package com.informatorio.laboratorioChad.service.investigador.impl;
 
 import com.informatorio.laboratorioChad.dominio.Investigador;
+import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
 import com.informatorio.laboratorioChad.service.investigador.InvestigadorService;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.informatorio.laboratorioChad.service.utils.Imput;
+import com.informatorio.laboratorioChad.service.utils.Validar;
 
 public class InvestigadorServiceImpl implements InvestigadorService {
-    private List<Investigador> investigadores = new ArrayList<>();
+    private InvestigadorRepository investigadorRepository;
 
-    @Override
-    public void resgistrarInvestigador(Investigador investigador) {
-        investigadores.add(investigador);
+    public InvestigadorServiceImpl(InvestigadorRepository investigadorRepository) {
+        this.investigadorRepository = investigadorRepository;
     }
 
     @Override
-    public List<Investigador> obtenerTodos() {
-        return investigadores;
-    }
+    public void resgistrarInvestigador() {
+        System.out.println("\n--- REGISTRAR INVESTIGADOR ---");
 
-//    equalsIgnoreCase compara el nombre del investigador con el parámetro nombre proporcionado,
-//    ignorando las diferencias entre mayúsculas y minúsculas.
-
-    @Override
-    public Investigador buscarPorNombre(String nombre) {
-        for(Investigador inv : investigadores){
-            if (inv.getNombre().equalsIgnoreCase(nombre)){
-                return inv;
+        String nombre;
+        do{
+            nombre = Imput.leerCadena("Ingrese nombre del investigador: ");
+            try{
+                Validar.validadNoVacio(nombre,"nombre");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+e.getMessage());
             }
-        }
-        return null;
+        }while (true);
+
+        int edad;
+        do {
+            edad= Imput.leerEntero("Ingrese edad del investigador: ");
+            try{
+                Validar.validarPositivo(edad,"edad");
+                break;
+            }catch (IllegalArgumentException e){
+                System.out.println("Error "+ e.getMessage());
+            }
+        }while (true);
+
+        Investigador investigador = new Investigador(nombre,edad);
+        investigadorRepository.guardar(investigador);
+        System.out.println(investigador.toString());
+        System.out.println("Registrado con éxito.");
     }
+
+
+
 }
