@@ -42,25 +42,24 @@ public class MenuServiceImpl implements MenuService {
         switch (opcion){
             case 1:
                 investigadorService.resgistrarInvestigador();
-                //registrarInvestigador();
                 break;
             case 2:
-                //registrarExperimento();
+                experimentoService.registrarExperimento();
                 break;
             case 3:
-                mostrarListadoExperimentos();
+                //mostrarListadoExperimentos();
                 break;
             case 4:
-                mostrarTotales();
+                //mostrarTotales();
                 break;
             case 5:
-                mostrarExperimentoMayorDuracion();
+                //mostrarExperimentoMayorDuracion();
                 break;
             case 6:
-                generarReporte();
+                //generarReporte();
                 break;
             case 7:
-                mostrarInvestigadorConMasExperimentos();
+                //mostrarInvestigadorConMasExperimentos();
                 break;
             case 9:
                 System.out.println("Saliendo del sistema...");
@@ -69,34 +68,6 @@ public class MenuServiceImpl implements MenuService {
                 System.out.println("Opción no válida. Intente nuevamente.");
         }
     }
-
-//    private void registrarInvestigador(){
-//        System.out.println("\n--- REGISTRAR INVESTIGADOR ---");
-//        String nombre;
-//        do{
-//            nombre = Imput.leerCadena("Ingrese nombre del investigador: ");
-//            try{
-//                Validar.validadNoVacio(nombre,"nombre");
-//                break;
-//            }catch (IllegalArgumentException e){
-//                System.out.println("Error: "+e.getMessage());
-//            }
-//        }while (true);
-//
-//        int edad;
-//        do {
-//            edad= Imput.leerEntero("Ingrese edad del investigador: ");
-//            try{
-//                Validar.validarPositivo(edad,"edad");
-//                break;
-//            }catch (IllegalArgumentException e){
-//                System.out.println("Error "+ e.getMessage());
-//            }
-//        }while (true);
-//        Investigador investigador = new Investigador(nombre,edad);
-//        investigadorService.resgistrarInvestigador(investigador);
-//        System.out.println("Investigador registrado con éxito.");
-//    }
 
 //    private void registrarExperimento(){
 //        System.out.println("Seleccione tipo de experimento: ");
@@ -202,58 +173,58 @@ public class MenuServiceImpl implements MenuService {
 //        experimentoService.registrarExperimentoFisico(ef);
 //        System.out.println("Experimento físico registrado con éxito.");
 //    }
-
-    private void mostrarListadoExperimentos(){
-        System.out.println("\n--- LISTADO DE EXPERIMENTOS ---");
-        List<Experimento> experimentos = experimentoService.obtenerTodos();
-        if (experimentos.isEmpty()){
-            System.out.println("No hay experimentos registrados.");
-            return;
-        }
-        for(Experimento exp : experimentos){
-            System.out.println(exp);
-        }
-    }
-
-    private void mostrarTotales(){
-        System.out.println("\n--- TOTALES DE EXPERIMENTOS ---");
-        int exitosos = experimentoService.getTotalExitosos();
-        int fallidos = experimentoService.getTotalFallidos();
-
-        System.out.println("Experimentos exitosos: " + exitosos);
-        System.out.println("Experimentos fallidos: " + fallidos);
-        System.out.println("Total de experimentos: " + (exitosos + fallidos));
-    }
-
-    private void mostrarExperimentoMayorDuracion(){
-        System.out.println("\n--- EXPERIMENTO DE MAYOR DURACIÓN ---");
-        Experimento experimento = experimentoService.getExperimentoMayorDuracion();
-
-        if (experimento == null){
-            System.out.println("No hay experimentos registrados.");
-        }else {
-            System.out.println("Experimento de mayor duración: "+experimento.getNombre()+" con "+experimento.getDuracion()+" minutos.");
-        }
-    }
-
-    private void generarReporte(){
-        System.out.println("\n--- REPORTE DE ESTADÍSTICAS ---");
-        double promedio = experimentoService.getPromedioDuracion();
-        double porcentajeExitoso = experimentoService.getPorcentajeExito();
-
-        System.out.println("Promedio de duración: "+promedio+" minutos.");
-        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
-    }
-
-    private void mostrarInvestigadorConMasExperimentos(){
-        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
-        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
-        if (investigador==null){
-            System.out.println("No hay investigadores con experimentos registrados.");
-        }else{
-            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
-        }
-    }
+//
+//    private void mostrarListadoExperimentos(){
+//        System.out.println("\n--- LISTADO DE EXPERIMENTOS ---");
+//        List<Experimento> experimentos = experimentoService.obtenerTodos();
+//        if (experimentos.isEmpty()){
+//            System.out.println("No hay experimentos registrados.");
+//            return;
+//        }
+//        for(Experimento exp : experimentos){
+//            System.out.println(exp);
+//        }
+//    }
+//
+//    private void mostrarTotales(){
+//        System.out.println("\n--- TOTALES DE EXPERIMENTOS ---");
+//        int exitosos = experimentoService.getTotalExitosos();
+//        int fallidos = experimentoService.getTotalFallidos();
+//
+//        System.out.println("Experimentos exitosos: " + exitosos);
+//        System.out.println("Experimentos fallidos: " + fallidos);
+//        System.out.println("Total de experimentos: " + (exitosos + fallidos));
+//    }
+//
+//    private void mostrarExperimentoMayorDuracion(){
+//        System.out.println("\n--- EXPERIMENTO DE MAYOR DURACIÓN ---");
+//        Experimento experimento = experimentoService.getExperimentoMayorDuracion();
+//
+//        if (experimento == null){
+//            System.out.println("No hay experimentos registrados.");
+//        }else {
+//            System.out.println("Experimento de mayor duración: "+experimento.getNombre()+" con "+experimento.getDuracion()+" minutos.");
+//        }
+//    }
+//
+//    private void generarReporte(){
+//        System.out.println("\n--- REPORTE DE ESTADÍSTICAS ---");
+//        double promedio = experimentoService.getPromedioDuracion();
+//        double porcentajeExitoso = experimentoService.getPorcentajeExito();
+//
+//        System.out.println("Promedio de duración: "+promedio+" minutos.");
+//        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
+//    }
+//
+//    private void mostrarInvestigadorConMasExperimentos(){
+//        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
+//        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
+//        if (investigador==null){
+//            System.out.println("No hay investigadores con experimentos registrados.");
+//        }else{
+//            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
+//        }
+//    }
 
 
 }

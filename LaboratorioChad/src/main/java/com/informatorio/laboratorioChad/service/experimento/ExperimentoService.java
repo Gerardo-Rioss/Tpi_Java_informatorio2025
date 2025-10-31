@@ -8,14 +8,12 @@ import com.informatorio.laboratorioChad.dominio.Investigador;
 import java.util.List;
 
 public interface ExperimentoService {
-    void registrarExperimentoQuimico(ExperimentoQuimico experimento);
-    void registrarExperimentoFisico(ExperimentoFisico experimento);
-    List<Experimento>obtenerTodos();
-    int getTotalExitosos();
-    int getTotalFallidos();
-    Experimento getExperimentoMayorDuracion();
-    double getPromedioDuracion();
-    double getPorcentajeExito();
-    Investigador getInvestigadorConMasExperimentos();
-    List<Investigador> getListaDeInvestigadores();
+    void registrarExperimento();
+//    int getTotalExitosos();
+//    int getTotalFallidos();
+//    Experimento getExperimentoMayorDuracion();
+//    double getPromedioDuracion();
+//    double getPorcentajeExito();
+//    Investigador getInvestigadorConMasExperimentos();
+//    List<Investigador> getListaDeInvestigadores();
 }

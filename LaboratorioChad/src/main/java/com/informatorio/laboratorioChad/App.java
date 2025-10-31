@@ -1,5 +1,7 @@
 package com.informatorio.laboratorioChad;
 
+import com.informatorio.laboratorioChad.repository.experimento.ExperimentoRepository;
+import com.informatorio.laboratorioChad.repository.experimento.impl.ExperimentoRepositoryImpl;
 import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
 import com.informatorio.laboratorioChad.repository.investigador.impl.InvestigadorRepositoryImpl;
 import com.informatorio.laboratorioChad.service.experimento.ExperimentoService;
@@ -15,8 +17,9 @@ public class App
     public static void main( String[] args )
     {
         InvestigadorRepository investigadorRepository = new InvestigadorRepositoryImpl();
+        ExperimentoRepository experimentoRepository = new ExperimentoRepositoryImpl();
         InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository) ;
-        ExperimentoService experimentoService = new ExperimentoServiceImpl();
+        ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository, investigadorRepository);
         MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
 
         int opcion;
