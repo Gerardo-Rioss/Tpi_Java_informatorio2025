@@ -8,7 +8,9 @@ import com.informatorio.laboratorioChad.dominio.Investigador;
 import java.util.List;
 
 public interface ExperimentoService {
-    void registrarExperimento();
+    ExperimentoQuimico registrarExperimentoQuimico(String nombre,int duracion,boolean resultado,String reactivo,Investigador investigador);
+    ExperimentoFisico registrarExperimentoFisico(String nombre,int duracion,boolean resultado,String instrumento, List<Investigador> seleccionados);
+    List<Experimento> obtenerTodos();
 //    int getTotalExitosos();
 //    int getTotalFallidos();
 //    Experimento getExperimentoMayorDuracion();

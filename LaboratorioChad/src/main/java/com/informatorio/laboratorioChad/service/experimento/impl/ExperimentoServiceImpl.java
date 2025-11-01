@@ -14,128 +14,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExperimentoServiceImpl implements ExperimentoService {
-    //private List<Experimento> experimentos = new ArrayList<>();
     private ExperimentoRepository experimentoRepository;
-    private InvestigadorRepository investigadorRepository;
 
     public ExperimentoServiceImpl(ExperimentoRepository experimentoRepository, InvestigadorRepository investigadorRepository) {
         this.experimentoRepository = experimentoRepository;
-        this.investigadorRepository = investigadorRepository;
     }
 
-    //    @Override
-//    public void registrarExperimentoQuimico(ExperimentoQuimico experimento) {
-//        experimentos.add(experimento);
-//    }
+        @Override
+    public ExperimentoQuimico registrarExperimentoQuimico(String nombre,int duracion,boolean resultado,String reactivo,Investigador investigador) {
+        ExperimentoQuimico eq = new ExperimentoQuimico(nombre,duracion,resultado,reactivo,investigador);
+        experimentoRepository.guardar(eq);
+        return eq;
+    }
+
+    @Override
+    public ExperimentoFisico registrarExperimentoFisico(String nombre, int duracion, boolean resultado, String instrumento, List<Investigador> seleccionados) {
+        ExperimentoFisico ef = new ExperimentoFisico(nombre,duracion,resultado,instrumento,seleccionados);
+        experimentoRepository.guardar(ef);
+        return ef;
+    }
+
+    @Override
+    public List<Experimento> obtenerTodos() {
+        return experimentoRepository.obtenerTodos();
+    }
 
 //    @Override
 //    public void registrarExperimentoFisico(ExperimentoFisico experimento) {
 //        experimentos.add(experimento);
 //    }
 
-    @Override
-    public void registrarExperimento() {
-        System.out.println("Seleccione tipo de experimento: ");
-        System.out.println("1. Químico");
-        System.out.println("2. Físico");
-
-        int tipo = Imput.leerEnteroConRango("Opcion: ",1,2);
-        String nombre;
-        do {
-            nombre = Imput.leerCadena("Nombre del experimento: ");
-            try{
-                Validar.validadNoVacio(nombre,"nombre del experimento");
-                break;
-            }catch (IllegalArgumentException e){
-                System.out.println("Error: "+e.getMessage());
-            }
-        }while (true);
-
-        int duracion;
-        do {
-            duracion = Imput.leerEntero("Duración (minutos): ");
-            try{
-                Validar.validarPositivo(duracion,"duración");
-                break;
-            }catch (IllegalArgumentException e){
-                System.out.println("Error: "+e.getMessage());
-            }
-        }while (true);
-
-        boolean resultado = Imput.leerBooleano("Resultado (éxito)");
-        if (tipo==1){
-            registrarExperimentoQuimico(nombre,duracion,resultado);
-        }else {
-            registrarExperimentoFisico(nombre, duracion, resultado);
-        }
-    }
-
-    private void registrarExperimentoQuimico(String nombre, int duracion, boolean resultado){
-        String reactivo;
-        do {
-            reactivo = Imput.leerCadena("Tipo de reactivo: ");
-            try{
-                Validar.validadNoVacio(reactivo,"reactivo");
-                break;
-            } catch(IllegalArgumentException e){
-                System.out.println("Error: "+ e.getMessage());
-            }
-        }while (true);
-
-        List<Investigador> investigadores = investigadorRepository.obtenerTodos();
-        if(investigadores.isEmpty()){
-            System.out.println("No hay investigadores registrados. Debe registrar al menos uno.");
-            return;
-        }
-        Investigador investigador= Imput.seleccionarDeLista("Seleccione Investigador: ",investigadores);
-
-        ExperimentoQuimico eq = new ExperimentoQuimico(nombre, duracion,resultado,reactivo,investigador);
-        experimentoRepository.guardar(eq);
-        System.out.println("Experimento químico registrado con éxito.");
-    }
-
-    private void registrarExperimentoFisico(String nombre, int duracion, boolean resultado){
-        String instrumento;
-        do {
-            instrumento = Imput.leerCadena("Instrumento utilizado: ");
-            try{
-                Validar.validadNoVacio(instrumento,"instrumento");
-                break;
-            }catch (IllegalArgumentException e){
-                System.out.println("Error: "+ e.getMessage());
-            }
-        }while (true);
-
-        List<Investigador>investigadores = investigadorRepository.obtenerTodos();
-        if (investigadores.isEmpty()){
-            System.out.println("No hay investigadores registrados. Debe registrar al menos uno.");
-            return;
-        }
-
-        List<Investigador> seleccionados= new ArrayList<>();
-        while (true){
-            try{
-                Investigador inv = Imput.seleccionarDeLista("Seleccione un investigador (0 para terminar): ",investigadores);
-                seleccionados.add(inv);
-            }catch (IllegalArgumentException e){
-                System.out.println("Error: "+ e.getMessage());
-                break;
-            }
-            System.out.println("¿Desea agregar otro investigador? (1: Si , 2: No): ");
-            if (!Imput.leerBooleano("")){
-                break;
-            }
-        }
-
-        if(seleccionados.isEmpty()){
-            System.out.println("No se seleccionaron investigadores. Operación cancelada.");
-            return;
-        }
-
-        ExperimentoFisico ef = new ExperimentoFisico(nombre, duracion,resultado,instrumento, seleccionados);
-        experimentoRepository.guardar(ef);
-        System.out.println("Experimento físico registrado con éxito.");
-    }
 
 //    @Override
 //    public int getTotalExitosos() {
