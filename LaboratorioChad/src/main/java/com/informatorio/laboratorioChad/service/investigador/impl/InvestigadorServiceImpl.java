@@ -1,6 +1,4 @@
 package com.informatorio.laboratorioChad.service.investigador.impl;
-
-import com.informatorio.laboratorioChad.dominio.ExperimentoQuimico;
 import com.informatorio.laboratorioChad.dominio.Investigador;
 import com.informatorio.laboratorioChad.repository.experimento.ExperimentoRepository;
 import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
@@ -11,7 +9,7 @@ import java.util.List;
 public class InvestigadorServiceImpl implements InvestigadorService {
     private InvestigadorRepository investigadorRepository;
 
-    public InvestigadorServiceImpl(InvestigadorRepository investigadorRepository,ExperimentoRepository experimentoRepository) {
+    public InvestigadorServiceImpl(InvestigadorRepository investigadorRepository) {
         this.investigadorRepository = investigadorRepository;
     }
 

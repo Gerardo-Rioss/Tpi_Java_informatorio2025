@@ -16,7 +16,7 @@ import java.util.List;
 public class ExperimentoServiceImpl implements ExperimentoService {
     private ExperimentoRepository experimentoRepository;
 
-    public ExperimentoServiceImpl(ExperimentoRepository experimentoRepository, InvestigadorRepository investigadorRepository) {
+    public ExperimentoServiceImpl(ExperimentoRepository experimentoRepository ) {
         this.experimentoRepository = experimentoRepository;
     }
 

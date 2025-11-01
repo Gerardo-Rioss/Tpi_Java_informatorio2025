@@ -18,8 +18,8 @@ public class App
     {
         InvestigadorRepository investigadorRepository = new InvestigadorRepositoryImpl();
         ExperimentoRepository experimentoRepository = new ExperimentoRepositoryImpl();
-        InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository, experimentoRepository) ;
-        ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository, investigadorRepository);
+        InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository) ;
+        ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
         MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
 
         int opcion;
