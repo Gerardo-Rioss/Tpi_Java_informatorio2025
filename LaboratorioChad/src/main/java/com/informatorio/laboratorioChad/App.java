@@ -11,6 +11,8 @@ import com.informatorio.laboratorioChad.service.investigador.InvestigadorService
 import com.informatorio.laboratorioChad.service.investigador.impl.InvestigadorServiceImpl;
 import com.informatorio.laboratorioChad.service.menu.MenuService;
 import com.informatorio.laboratorioChad.service.menu.impl.MenuServiceImpl;
+import com.informatorio.laboratorioChad.service.ui.UiServices;
+import com.informatorio.laboratorioChad.service.ui.impl.UiServicesImpl;
 import com.informatorio.laboratorioChad.service.utils.DatosIniciales;
 import com.informatorio.laboratorioChad.service.utils.Imput;
 import com.informatorio.laboratorioChad.service.utils.Validar;
@@ -26,7 +28,8 @@ public class App
         ExperimentoRepository experimentoRepository = new ExperimentoRepositoryImpl();
         InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository) ;
         ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
-        MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
+        UiServices uiServices= new UiServicesImpl(investigadorService, experimentoService);
+        MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService,uiServices);
 
         //---Cargar datos iniciales para  poder probar la app
         DatosIniciales.cargarDatos(investigadorService,experimentoService);
