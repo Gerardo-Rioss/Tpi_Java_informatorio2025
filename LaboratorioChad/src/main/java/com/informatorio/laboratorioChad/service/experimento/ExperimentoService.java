@@ -17,5 +17,4 @@ public interface ExperimentoService {
     double getPromedioDuracion();
     double getPorcentajeExito();
     Investigador getInvestigadorConMasExperimentos();
-    List<Investigador> getListaDeInvestigadores();
 }

@@ -108,9 +108,9 @@ public class UiServicesImpl implements UiServices {
         try{
             ExperimentoQuimico eq=experimentoService.registrarExperimentoQuimico(nombre,duracion,resultado,reactivo,investigador);
             System.out.println(eq.toString());
-            System.out.println("Experimento químico registrado con éxito.");
+            System.out.println("✅ Experimento registrado con éxito");
         }catch (IllegalArgumentException e){
-            System.out.println("Error: "+e.getMessage());
+            System.out.println("❌ Error: " + e.getMessage());
         }
 
     }
@@ -131,13 +131,23 @@ public class UiServicesImpl implements UiServices {
         List<Investigador> seleccionados= new ArrayList<>();
         while (true){
             try{
-                Investigador inv = Imput.seleccionarDeLista("Seleccione un investigador (0 para terminar): ",investigadores);
+                //--Crea una lista que excluye a los ya seleccionados
+                List<Investigador>disponibles = new ArrayList<>(investigadores);
+                disponibles.removeAll(seleccionados);
+
+                //--Si no hay investigadores disponibles termina
+                if(disponibles.isEmpty()){
+                    System.out.println("No hay mas investigadores disponibles.");
+                    break;
+                }
+
+                Investigador inv = Imput.seleccionarDeLista("Seleccione un investigador (0 para terminar): ",disponibles);
                 if (inv==null){
                     break;
                 }
                 seleccionados.add(inv);
             }catch (IllegalArgumentException e){
-                System.out.println("Error: "+ e.getMessage());
+                System.out.println("❌ Error: " + e.getMessage());
             }
             System.out.println("¿Desea agregar otro investigador? (1: Si , 2: No): ");
             if (!Imput.leerBooleano("")){
@@ -155,7 +165,7 @@ public class UiServicesImpl implements UiServices {
         try{
             ExperimentoFisico ef = experimentoService.registrarExperimentoFisico(nombre,duracion,resultado,instrumento,seleccionados);
             System.out.println(ef.toString());
-            System.out.println("Experimento físico registrado con éxito.");
+            System.out.println("✅ Experimento registrado con éxito");
         }catch (IllegalArgumentException e){
             System.out.println("Error: "+e.getMessage());
         }

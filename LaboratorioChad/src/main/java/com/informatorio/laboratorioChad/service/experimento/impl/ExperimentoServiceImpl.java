@@ -100,21 +100,23 @@ public class ExperimentoServiceImpl implements ExperimentoService {
     @Override
     public double getPromedioDuracion() {
         if(experimentoRepository.obtenerTodos().isEmpty()){
-            return 0;
+            return 0.00;
         }
         int total=0;
         for(Experimento exp: experimentoRepository.obtenerTodos()){
             total+=exp.getDuracion();
         }
-        return (double) total/experimentoRepository.obtenerTodos().size();
+        double promedio= (double) total/experimentoRepository.obtenerTodos().size();
+        return Math.round(promedio*100.0)/100.0;
     }
 
     @Override
     public double getPorcentajeExito() {
         if(experimentoRepository.obtenerTodos().isEmpty()){
-            return 0;
+            return 0.00;
         }
-        return (getTotalExitosos()*100.0)/experimentoRepository.obtenerTodos().size();
+        double porcentaje =(getTotalExitosos()*100.0)/experimentoRepository.obtenerTodos().size();
+        return Math.round(porcentaje*100.0)/100.0;
     }
 
     @Override
@@ -144,8 +146,7 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         return masFrecuente;
     }
 
-    @Override
-    public List<Investigador> getListaDeInvestigadores(){
+    private List<Investigador> getListaDeInvestigadores(){
         List<Investigador> lista = new ArrayList<>();
         for(Experimento exp:experimentoRepository.obtenerTodos()){
             if(exp instanceof ExperimentoQuimico ){
