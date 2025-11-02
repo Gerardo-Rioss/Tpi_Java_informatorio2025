@@ -25,11 +25,14 @@ public class UiServicesImpl implements UiServices {
     public void registrarInvestigador() {
         System.out.println("\n--- REGISTRAR INVESTIGADOR ---");
         String nombre = Imput.leerCadena("Ingrese nombre del investigador: ","nombre");;
-        //int edad =  Imput.leerEntero("Ingrese edad del investigador: ");
-        int edad = Imput.leerEnteroConRango("Ingrese la edad del investigador: ",18,70);
-        Investigador investigador= investigadorService.resgistrarInvestigador(nombre,edad);
-        System.out.println(investigador.toString());
-        System.out.println("Registrado con éxito.");
+        int edad = Imput.leerEnteroConRango("Ingrese la edad del investigador: ",18,65);
+        try{
+            Investigador investigador= investigadorService.resgistrarInvestigador(nombre,edad);
+            System.out.println(investigador.toString());
+            System.out.println("✅ Investigador registrado con éxito");
+        }catch (IllegalArgumentException e){
+            System.out.println("❌ Error: " + e.getMessage());
+        }
     }
 
     @Override
@@ -102,10 +105,14 @@ public class UiServicesImpl implements UiServices {
             return;
         }
         Investigador investigador= Imput.seleccionarDeLista("Seleccione Investigador: ",investigadores);
+        try{
+            ExperimentoQuimico eq=experimentoService.registrarExperimentoQuimico(nombre,duracion,resultado,reactivo,investigador);
+            System.out.println(eq.toString());
+            System.out.println("Experimento químico registrado con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.println("Error: "+e.getMessage());
+        }
 
-        ExperimentoQuimico eq=experimentoService.registrarExperimentoQuimico(nombre,duracion,resultado,reactivo,investigador);
-        System.out.println(eq.toString());
-        System.out.println("Experimento químico registrado con éxito.");
     }
 
     private void registrarExperimentoFisico(String nombre, int duracion, boolean resultado){
@@ -145,9 +152,14 @@ public class UiServicesImpl implements UiServices {
         }
 
         //---registrar experimento
-        ExperimentoFisico ef = experimentoService.registrarExperimentoFisico(nombre,duracion,resultado,instrumento,seleccionados);
-        System.out.println(ef.toString());
-        System.out.println("Experimento físico registrado con éxito.");
+        try{
+            ExperimentoFisico ef = experimentoService.registrarExperimentoFisico(nombre,duracion,resultado,instrumento,seleccionados);
+            System.out.println(ef.toString());
+            System.out.println("Experimento físico registrado con éxito.");
+        }catch (IllegalArgumentException e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        
     }
 
     @Override

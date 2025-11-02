@@ -10,4 +10,6 @@ public interface InvestigadorRepository {
     void guardar (Investigador investigador);
 
     List<Investigador> obtenerTodos();
+
+    Investigador buscarPorNombre(String nombre);
 }

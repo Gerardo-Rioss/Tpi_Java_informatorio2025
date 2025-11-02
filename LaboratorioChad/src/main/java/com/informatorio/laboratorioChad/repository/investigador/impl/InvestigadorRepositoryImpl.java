@@ -20,4 +20,14 @@ public class InvestigadorRepositoryImpl implements InvestigadorRepository {
         return investigadores;
     }
 
+    @Override
+    public Investigador buscarPorNombre(String nombre) {
+        for (Investigador inv : investigadores){
+            if (inv.getNombre().equalsIgnoreCase(nombre)){
+                return inv;
+            }
+        }
+        return null;
+    }
+
 }
