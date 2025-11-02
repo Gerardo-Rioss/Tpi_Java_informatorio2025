@@ -55,10 +55,10 @@ public class MenuServiceImpl implements MenuService {
                 uiMostrarExperimentoMayorDuracion();
                 break;
             case 6:
-                //generarReporte();
+                uiGenerarReporte();
                 break;
             case 7:
-                //mostrarInvestigadorConMasExperimentos();
+                uiMostrarInvestigadorConMasExperimentos();
                 break;
             case 9:
                 System.out.println("Saliendo del sistema...");
@@ -182,24 +182,24 @@ public class MenuServiceImpl implements MenuService {
         }
     }
 
-//    private void generarReporte(){
-//        System.out.println("\n--- REPORTE DE ESTADÍSTICAS ---");
-//        double promedio = experimentoService.getPromedioDuracion();
-//        double porcentajeExitoso = experimentoService.getPorcentajeExito();
-//
-//        System.out.println("Promedio de duración: "+promedio+" minutos.");
-//        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
-//    }
-//
-//    private void mostrarInvestigadorConMasExperimentos(){
-//        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
-//        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
-//        if (investigador==null){
-//            System.out.println("No hay investigadores con experimentos registrados.");
-//        }else{
-//            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
-//        }
-//    }
+    private void uiGenerarReporte(){
+        System.out.println("\n--- REPORTE DE ESTADÍSTICAS ---");
+        double promedio = experimentoService.getPromedioDuracion();
+        double porcentajeExitoso = experimentoService.getPorcentajeExito();
+
+        System.out.println("Promedio de duración: "+promedio+" minutos.");
+        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%");
+    }
+
+    private void uiMostrarInvestigadorConMasExperimentos(){
+        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
+        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
+        if (investigador==null){
+            System.out.println("No hay investigadores con experimentos registrados.");
+        }else{
+            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
+        }
+    }
 
 
 }

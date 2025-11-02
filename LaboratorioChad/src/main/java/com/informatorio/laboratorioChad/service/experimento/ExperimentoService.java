@@ -14,8 +14,8 @@ public interface ExperimentoService {
     int getTotalExitosos();
     int getTotalFallidos();
     Experimento getExperimentoMayorDuracion();
-//    double getPromedioDuracion();
-//    double getPorcentajeExito();
-//    Investigador getInvestigadorConMasExperimentos();
-//    List<Investigador> getListaDeInvestigadores();
+    double getPromedioDuracion();
+    double getPorcentajeExito();
+    Investigador getInvestigadorConMasExperimentos();
+    List<Investigador> getListaDeInvestigadores();
 }

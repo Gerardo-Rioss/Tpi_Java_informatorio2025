@@ -74,68 +74,68 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         }
         return mayor;
     }
-//
-//    @Override
-//    public double getPromedioDuracion() {
-//        if(experimentos.isEmpty()){
-//            return 0;
-//        }
-//        int total=0;
-//        for(Experimento exp: experimentos){
-//            total+=exp.getDuracion();
-//        }
-//        return (double) total/experimentos.size();
-//    }
-//
-//    @Override
-//    public double getPorcentajeExito() {
-//        if(experimentos.isEmpty()){
-//            return 0;
-//        }
-//        return (getTotalExitosos()*100.0)/experimentos.size();
-//    }
-//
-//    @Override
-//    public Investigador getInvestigadorConMasExperimentos() {
-//        List<Investigador> todos = getListaDeInvestigadores();
-//        if(todos.isEmpty()){
-//            return null;
-//        }
-//        Investigador masFrecuente = null;
-//        int maxContador = 0;
-//        // Recorremos la lista para ver cuál investigador aparece más veces
-//        for (int i =0; i<todos.size();i++){
-//            Investigador actual = todos.get(i);
-//            int contador=0;
-//            //Contamos cuantas veces aparece el investigador
-//            for(int j=0;j<todos.size();j++){
-//                if(todos.get(j).equals(actual)){
-//                    contador++;
-//                }
-//            }
-//            // Si este tiene más apariciones que el máximo actual, lo actualizamos
-//            if (contador>maxContador){
-//                maxContador= contador;
-//                masFrecuente=actual;
-//            }
-//        }
-//        return masFrecuente;
-//    }
-//
-//    @Override
-//    public List<Investigador> getListaDeInvestigadores(){
-//        List<Investigador> lista = new ArrayList<>();
-//        for(Experimento exp:experimentos){
-//            if(exp instanceof ExperimentoQuimico ){
-//                ExperimentoQuimico eq = (ExperimentoQuimico) exp;
-//                lista.add(eq.getInvestigador());
-//            } else if (exp instanceof ExperimentoFisico) {
-//                ExperimentoFisico ef = (ExperimentoFisico) exp;
-//                lista.addAll(ef.getInvestigadores());
-//            }
-//        }
-//        return lista;
-//    }
+
+    @Override
+    public double getPromedioDuracion() {
+        if(experimentoRepository.obtenerTodos().isEmpty()){
+            return 0;
+        }
+        int total=0;
+        for(Experimento exp: experimentoRepository.obtenerTodos()){
+            total+=exp.getDuracion();
+        }
+        return (double) total/experimentoRepository.obtenerTodos().size();
+    }
+
+    @Override
+    public double getPorcentajeExito() {
+        if(experimentoRepository.obtenerTodos().isEmpty()){
+            return 0;
+        }
+        return (getTotalExitosos()*100.0)/experimentoRepository.obtenerTodos().size();
+    }
+
+    @Override
+    public Investigador getInvestigadorConMasExperimentos() {
+        List<Investigador> todos = getListaDeInvestigadores();
+        if(todos.isEmpty()){
+            return null;
+        }
+        Investigador masFrecuente = null;
+        int maxContador = 0;
+        // Recorremos la lista para ver cuál investigador aparece más veces
+        for (int i =0; i<todos.size();i++){
+            Investigador actual = todos.get(i);
+            int contador=0;
+            //Contamos cuantas veces aparece el investigador
+            for(int j=0;j<todos.size();j++){
+                if(todos.get(j).equals(actual)){
+                    contador++;
+                }
+            }
+            // Si este tiene más apariciones que el máximo actual, lo actualizamos
+            if (contador>maxContador){
+                maxContador= contador;
+                masFrecuente=actual;
+            }
+        }
+        return masFrecuente;
+    }
+
+    @Override
+    public List<Investigador> getListaDeInvestigadores(){
+        List<Investigador> lista = new ArrayList<>();
+        for(Experimento exp:experimentoRepository.obtenerTodos()){
+            if(exp instanceof ExperimentoQuimico ){
+                ExperimentoQuimico eq = (ExperimentoQuimico) exp;
+                lista.add(eq.getInvestigador());
+            } else if (exp instanceof ExperimentoFisico) {
+                ExperimentoFisico ef = (ExperimentoFisico) exp;
+                lista.addAll(ef.getInvestigadores());
+            }
+        }
+        return lista;
+    }
 
 
 }
