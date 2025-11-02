@@ -61,19 +61,19 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         return contador;
     }
 
-//    @Override
-//    public Experimento getExperimentoMayorDuracion() {
-//        if(experimentos.isEmpty()){
-//            return null;
-//        }
-//        Experimento mayor = experimentos.get(0);
-//        for(Experimento exp: experimentos){
-//            if(exp.getDuracion()>mayor.getDuracion()){
-//                mayor= exp;
-//            }
-//        }
-//        return mayor;
-//    }
+    @Override
+    public Experimento getExperimentoMayorDuracion() {
+        if(experimentoRepository.obtenerTodos().isEmpty()){
+            return null;
+        }
+        Experimento mayor = experimentoRepository.obtenerTodos().get(0);
+        for(Experimento exp: experimentoRepository.obtenerTodos()){
+            if(exp.getDuracion()>mayor.getDuracion()){
+                mayor= exp;
+            }
+        }
+        return mayor;
+    }
 //
 //    @Override
 //    public double getPromedioDuracion() {

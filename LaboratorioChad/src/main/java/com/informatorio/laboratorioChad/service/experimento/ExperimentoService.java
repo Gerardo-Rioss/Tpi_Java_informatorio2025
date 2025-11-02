@@ -13,7 +13,7 @@ public interface ExperimentoService {
     List<Experimento> obtenerTodos();
     int getTotalExitosos();
     int getTotalFallidos();
-//    Experimento getExperimentoMayorDuracion();
+    Experimento getExperimentoMayorDuracion();
 //    double getPromedioDuracion();
 //    double getPorcentajeExito();
 //    Investigador getInvestigadorConMasExperimentos();

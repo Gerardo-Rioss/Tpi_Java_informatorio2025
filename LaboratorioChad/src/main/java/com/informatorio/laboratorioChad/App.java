@@ -28,6 +28,7 @@ public class App
         ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
         MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
 
+        //---Cargar datos iniciales para  poder probar la app
         DatosIniciales.cargarDatos(investigadorService,experimentoService);
 
         int opcion;
