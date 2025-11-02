@@ -91,6 +91,7 @@ public class UiServicesImpl implements UiServices {
         double porcentajeExitoso = experimentoService.getPorcentajeExito();
 
         System.out.println("Promedio de duración: "+promedio+" minutos.");
+        System.out.println("Porcentaje de éxito: "+porcentajeExitoso+"%.");
     }
 
     private void registrarExperimentoQuimico(String nombre, int duracion, boolean resultado){
@@ -151,6 +152,13 @@ public class UiServicesImpl implements UiServices {
 
     @Override
     public void mostrarInvestigadorConMasExperimentos() {
+        System.out.println("\n--- INVESTIGADOR CON MÁS EXPERIMENTOS ---");
+        Investigador investigador = experimentoService.getInvestigadorConMasExperimentos();
+        if (investigador==null){
+            System.out.println("No hay investigadores con experimentos registrados.");
+        }else{
+            System.out.println("Investigador con más experimentos: "+ investigador.getNombre()+ " (Edad: "+investigador.getEdad()+")");
+        }
 
     }
 }
