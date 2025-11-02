@@ -53,6 +53,9 @@ public class MenuServiceImpl implements MenuService {
             case 7:
                 uiServices.mostrarInvestigadorConMasExperimentos();
                 break;
+            case 8:
+                uiServices.exportarInvestigadoresCSV();
+                break;
             case 9:
                 System.out.println("Saliendo del sistema...");
                 break;

@@ -8,5 +8,5 @@ public interface UiServices {
     void mostrarExperimentoMayorDuracion();
     void generarReporte();
     void mostrarInvestigadorConMasExperimentos();
-
+    void exportarInvestigadoresCSV();
 }

@@ -4,6 +4,8 @@ import com.informatorio.laboratorioChad.dominio.Experimento;
 import com.informatorio.laboratorioChad.dominio.ExperimentoFisico;
 import com.informatorio.laboratorioChad.dominio.ExperimentoQuimico;
 import com.informatorio.laboratorioChad.dominio.Investigador;
+import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
+import com.informatorio.laboratorioChad.service.archivos.ExportarInvestigadoresServices;
 import com.informatorio.laboratorioChad.service.experimento.ExperimentoService;
 import com.informatorio.laboratorioChad.service.investigador.InvestigadorService;
 import com.informatorio.laboratorioChad.service.ui.UiServices;
@@ -15,10 +17,12 @@ import java.util.List;
 public class UiServicesImpl implements UiServices {
     private InvestigadorService investigadorService;
     private ExperimentoService experimentoService;
+    private ExportarInvestigadoresServices exportarInvestigadoresServices;
 
-    public UiServicesImpl(InvestigadorService investigadorService, ExperimentoService experimentoService) {
+    public UiServicesImpl(InvestigadorService investigadorService, ExperimentoService experimentoService,ExportarInvestigadoresServices exportarInvestigadoresServices) {
         this.investigadorService = investigadorService;
         this.experimentoService= experimentoService;
+        this.exportarInvestigadoresServices= exportarInvestigadoresServices;
     }
 
     @Override
@@ -173,4 +177,10 @@ public class UiServicesImpl implements UiServices {
         }
 
     }
+
+    @Override
+    public void exportarInvestigadoresCSV() {
+        exportarInvestigadoresServices.exportarInvestigadoresCSV(investigadorService.obtenerTodos());
+    }
+
 }
