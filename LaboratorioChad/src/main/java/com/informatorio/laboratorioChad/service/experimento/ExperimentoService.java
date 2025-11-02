@@ -11,8 +11,8 @@ public interface ExperimentoService {
     ExperimentoQuimico registrarExperimentoQuimico(String nombre,int duracion,boolean resultado,String reactivo,Investigador investigador);
     ExperimentoFisico registrarExperimentoFisico(String nombre,int duracion,boolean resultado,String instrumento, List<Investigador> seleccionados);
     List<Experimento> obtenerTodos();
-//    int getTotalExitosos();
-//    int getTotalFallidos();
+    int getTotalExitosos();
+    int getTotalFallidos();
 //    Experimento getExperimentoMayorDuracion();
 //    double getPromedioDuracion();
 //    double getPorcentajeExito();

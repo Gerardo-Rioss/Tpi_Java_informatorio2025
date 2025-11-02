@@ -27,7 +27,7 @@ public class Imput {
             if (valor>= min && valor<=max){
                 return valor;
             }else{
-                System.out.println("Error: El número debe estar entre "+min+" y "+max+"." );
+                System.out.println("Error: El valor debe estar entre "+min+" y "+max+"." );
             }
         }
     }
@@ -43,9 +43,18 @@ public class Imput {
         }
     }
 
-    public static String leerCadena(String mensaje){
-        System.out.print(mensaje);
-        return scanner.nextLine();
+    public static String leerCadena(String mensaje, String campo){
+        String cadenaIngresada;
+        do {
+            System.out.print(mensaje);
+            cadenaIngresada= scanner.nextLine();
+            try{
+                Validar.validarNoVacio(cadenaIngresada,campo);
+                return cadenaIngresada.trim();
+            }catch (IllegalArgumentException e){
+                System.out.println("Error: "+e.getMessage());
+            }
+        }while (true);
     }
 
     public static <T> T seleccionarDeLista(String mensaje, List<T> lista){

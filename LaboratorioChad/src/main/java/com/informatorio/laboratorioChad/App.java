@@ -1,5 +1,6 @@
 package com.informatorio.laboratorioChad;
 
+import com.informatorio.laboratorioChad.dominio.Investigador;
 import com.informatorio.laboratorioChad.repository.experimento.ExperimentoRepository;
 import com.informatorio.laboratorioChad.repository.experimento.impl.ExperimentoRepositoryImpl;
 import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
@@ -10,7 +11,12 @@ import com.informatorio.laboratorioChad.service.investigador.InvestigadorService
 import com.informatorio.laboratorioChad.service.investigador.impl.InvestigadorServiceImpl;
 import com.informatorio.laboratorioChad.service.menu.MenuService;
 import com.informatorio.laboratorioChad.service.menu.impl.MenuServiceImpl;
+import com.informatorio.laboratorioChad.service.utils.DatosIniciales;
 import com.informatorio.laboratorioChad.service.utils.Imput;
+import com.informatorio.laboratorioChad.service.utils.Validar;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class App
 {
@@ -22,12 +28,18 @@ public class App
         ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
         MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService);
 
+        DatosIniciales.cargarDatos(investigadorService,experimentoService);
+
         int opcion;
         do{
             menuService.mostrarMenu();
             opcion= Imput.leerEnteroConRango("Seleccione una opción: ",1,9);
             menuService.procesarOpcion(opcion);
         }while (opcion!=9);
+
+
+
+
 
 
     }

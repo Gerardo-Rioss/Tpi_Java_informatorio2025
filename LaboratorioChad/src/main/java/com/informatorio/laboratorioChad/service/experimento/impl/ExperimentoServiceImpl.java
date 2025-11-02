@@ -39,34 +39,28 @@ public class ExperimentoServiceImpl implements ExperimentoService {
         return experimentoRepository.obtenerTodos();
     }
 
-//    @Override
-//    public void registrarExperimentoFisico(ExperimentoFisico experimento) {
-//        experimentos.add(experimento);
-//    }
+    @Override
+    public int getTotalExitosos() {
+        int contador = 0;
+        for(Experimento exp: experimentoRepository.obtenerTodos()){
+            if(exp.getResultado()){
+                contador++;
+            }
+        }
+        return contador;
+    }
 
+    @Override
+    public int getTotalFallidos() {
+        int contador=0;
+        for(Experimento exp: experimentoRepository.obtenerTodos()){
+            if(exp.getResultado()==false){
+                contador++;
+            }
+        }
+        return contador;
+    }
 
-//    @Override
-//    public int getTotalExitosos() {
-//        int contador = 0;
-//        for(Experimento exp: experimentos){
-//            if(exp.getResultado()){
-//                contador++;
-//            }
-//        }
-//        return contador;
-//    }
-//
-//    @Override
-//    public int getTotalFallidos() {
-//        int contador=0;
-//        for(Experimento exp: experimentos){
-//            if(exp.getResultado()==false){
-//                contador++;
-//            }
-//        }
-//        return contador;
-//    }
-//
 //    @Override
 //    public Experimento getExperimentoMayorDuracion() {
 //        if(experimentos.isEmpty()){
