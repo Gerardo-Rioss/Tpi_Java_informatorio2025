@@ -1,15 +1,18 @@
 package com.informatorio.laboratorioChad.service.investigador.impl;
 import com.informatorio.laboratorioChad.dominio.Investigador;
 import com.informatorio.laboratorioChad.repository.investigador.InvestigadorRepository;
+import com.informatorio.laboratorioChad.service.archivos.ExportarInvestigadoresServices;
 import com.informatorio.laboratorioChad.service.investigador.InvestigadorService;
 
 import java.util.List;
 
 public class InvestigadorServiceImpl implements InvestigadorService {
     private InvestigadorRepository investigadorRepository;
+    private ExportarInvestigadoresServices exportarInvestigadoresServices;
 
-    public InvestigadorServiceImpl(InvestigadorRepository investigadorRepository) {
+    public InvestigadorServiceImpl(InvestigadorRepository investigadorRepository, ExportarInvestigadoresServices exportarInvestigadoresServices) {
         this.investigadorRepository = investigadorRepository;
+        this.exportarInvestigadoresServices= exportarInvestigadoresServices;
     }
 
     @Override
@@ -32,6 +35,11 @@ public class InvestigadorServiceImpl implements InvestigadorService {
     @Override
     public List<Investigador> obtenerTodos() {
         return investigadorRepository.obtenerTodos();
+    }
+
+    @Override
+    public void exportarInvestigadoresCSV() {
+        exportarInvestigadoresServices.exportarInvestigadoresCSV(investigadorRepository.obtenerTodos());
     }
 
 

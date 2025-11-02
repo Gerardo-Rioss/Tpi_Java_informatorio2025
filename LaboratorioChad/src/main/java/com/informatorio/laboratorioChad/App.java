@@ -28,10 +28,10 @@ public class App
     {
         InvestigadorRepository investigadorRepository = new InvestigadorRepositoryImpl();
         ExperimentoRepository experimentoRepository = new ExperimentoRepositoryImpl();
-        InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository) ;
-        ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
         ExportarInvestigadoresServices exportarInvestigadoresServices= new ExportarInvestigadoresServicesImpl();
-        UiServices uiServices= new UiServicesImpl(investigadorService, experimentoService,exportarInvestigadoresServices);
+        InvestigadorService investigadorService = new InvestigadorServiceImpl(investigadorRepository,exportarInvestigadoresServices) ;
+        ExperimentoService experimentoService = new ExperimentoServiceImpl(experimentoRepository);
+        UiServices uiServices= new UiServicesImpl(investigadorService, experimentoService);
         MenuService menuService= new MenuServiceImpl(investigadorService, experimentoService,uiServices);
 
         //---Cargar datos iniciales para  poder probar la app

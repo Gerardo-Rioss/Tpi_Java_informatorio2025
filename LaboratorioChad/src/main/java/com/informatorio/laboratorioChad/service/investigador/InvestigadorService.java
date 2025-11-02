@@ -6,4 +6,5 @@ import java.util.List;
 public interface InvestigadorService {
     Investigador resgistrarInvestigador(String nombre, int edad);
     List<Investigador> obtenerTodos();
+    void exportarInvestigadoresCSV();
 }
