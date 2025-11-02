@@ -22,6 +22,18 @@ public class ExperimentoServiceImpl implements ExperimentoService {
 
         @Override
     public ExperimentoQuimico registrarExperimentoQuimico(String nombre,int duracion,boolean resultado,String reactivo,Investigador investigador) {
+            if (nombre == null || nombre.trim().isEmpty()) {
+                throw new IllegalArgumentException("El nombre del experimento no puede estar vacío.");
+            }
+            if (duracion <= 0) {
+                throw new IllegalArgumentException("La duración debe ser mayor a 0 minutos.");
+            }
+            if (reactivo == null || reactivo.trim().isEmpty()) {
+                throw new IllegalArgumentException("El reactivo no puede estar vacío.");
+            }
+            if (reactivo.trim().length() < 2) {
+                throw new IllegalArgumentException("El reactivo debe tener al menos 2 caracteres.");
+            }
         ExperimentoQuimico eq = new ExperimentoQuimico(nombre,duracion,resultado,reactivo,investigador);
         experimentoRepository.guardar(eq);
         return eq;
@@ -29,6 +41,16 @@ public class ExperimentoServiceImpl implements ExperimentoService {
 
     @Override
     public ExperimentoFisico registrarExperimentoFisico(String nombre, int duracion, boolean resultado, String instrumento, List<Investigador> seleccionados) {
+        if (nombre == null || nombre.trim().isEmpty())
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        if (duracion <= 0)
+            throw new IllegalArgumentException("La duración debe ser mayor a 0.");
+        if (instrumento == null || instrumento.trim().isEmpty())
+            throw new IllegalArgumentException("El instrumento no puede estar vacío.");
+        if (seleccionados == null)
+            throw new IllegalArgumentException("La lista de investigadores no puede ser nula.");
+        if (seleccionados.isEmpty())
+            throw new IllegalArgumentException("Debe haber al menos un investigador.");
         ExperimentoFisico ef = new ExperimentoFisico(nombre,duracion,resultado,instrumento,seleccionados);
         experimentoRepository.guardar(ef);
         return ef;

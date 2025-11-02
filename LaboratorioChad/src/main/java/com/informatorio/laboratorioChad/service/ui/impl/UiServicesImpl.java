@@ -159,7 +159,7 @@ public class UiServicesImpl implements UiServices {
         }catch (IllegalArgumentException e){
             System.out.println("Error: "+e.getMessage());
         }
-        
+
     }
 
     @Override
